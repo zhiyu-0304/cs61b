@@ -117,6 +117,7 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
         board.setViewingPerspective(side);
+        //just modify
         for(int col=0;col<board.size();col++) {
             boolean[] rowMerged = new boolean[board.size()];
             for(int row=board.size()-2;row>=0;row--) {
