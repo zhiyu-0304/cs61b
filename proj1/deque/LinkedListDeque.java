@@ -84,4 +84,20 @@ public class LinkedListDeque<T> {
         size--;
         return temp;
     }
+    public boolean equals(Object o){
+        if(o instanceof LinkedListDeque){
+            LinkedListDeque<?> lld=(LinkedListDeque<?>)o;
+            if(size==lld.size){
+                Node curr1=sentinel.next;
+                Node curr2= (Node) lld.sentinel.next;
+                for(int i=0;i<size;i++){
+                    if(curr1.item!=curr2.item){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 }
