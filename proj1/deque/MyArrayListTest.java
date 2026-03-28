@@ -188,6 +188,7 @@ public class MyArrayListTest {
         lld4.addLast("string2");
         lld4.addLast("string3");
         assertEquals(lld3,lld4);
+        assertEquals(lld1,lld3);
     }
     @Test
     public void randomizedTest(){
