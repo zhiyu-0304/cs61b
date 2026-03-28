@@ -103,15 +103,11 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
             return true;
         if(o instanceof LinkedListDeque){
             LinkedListDeque<?> lld=(LinkedListDeque<?>)o;
-            if(size==lld.size){
-                Node curr1=sentinel.next;
-                Node curr2= (Node) lld.sentinel.next;
+            if(size==lld.size()){
                 for(int i=0;i<size;i++){
-                    if(curr1.item!=curr2.item){
+                    if(!this.get(i).equals(lld.get(i))){
                         return false;
                     }
-                    curr1=curr1.next;
-                    curr2=curr2.next;
                 }
                 return true;
             }
