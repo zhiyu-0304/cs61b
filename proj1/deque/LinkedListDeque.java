@@ -1,9 +1,11 @@
 package deque;
 
+import org.junit.Test;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListDeque<T> implements Iterable<T>{
+public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
     private class Node{
         private T item;
         private Node next;
@@ -23,6 +25,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
         size=0;
     }
     //get the ith item of the list
+    @Override
     public T get(int index){
         Node node=this.sentinel.next;
         if(node==sentinel){
@@ -37,32 +40,38 @@ public class LinkedListDeque<T> implements Iterable<T>{
         return node.item;
     }
     //add an item to the first location in the list
+    @Override
     public void addFirst(T item){
         Node next=sentinel.next;
         sentinel.next=new Node(item,next,sentinel);
         next.prev=sentinel.next;
         size++;
     }
+    @Override
     public void addLast(T item){
         Node prev=sentinel.prev;
         sentinel.prev=new Node(item,sentinel,prev);
         prev.next=sentinel.prev;
         size++;
     }
+    @Override
     public boolean isEmpty(){
         return size==0;
     }
+    @Override
     public int size() {
         return size;
     }
+    @Override
     public void printDeque(){
         Node curr=sentinel.next;
         while(curr!=sentinel){
-            System.out.print(curr.item+" ");
+            System.out.print(curr.item.toString()+" ");
             curr=curr.next;
         }
         System.out.println();
     }
+    @Override
     public T removeFirst(){
         Node node=sentinel.next;
         if(node==sentinel){
@@ -75,6 +84,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
         size--;
         return temp;
     }
+    @Override
     public T removeLast(){
         Node node=sentinel.prev;
         if(node==sentinel){
@@ -87,6 +97,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
         size--;
         return temp;
     }
+    @Override
     public boolean equals(Object o){
         if(o==this)
             return true;
@@ -126,6 +137,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
             return temp;
         }
     }
+    @Override
     public Iterator<T> iterator(){
         return new LinkedListDequeIterator();
     }

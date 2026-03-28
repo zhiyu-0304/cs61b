@@ -1,10 +1,9 @@
 package deque;
 
-import java.util.Deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayDeque<T> implements Iterable<T> {
+public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
     private T[] items;
     private int first;
     private int last;
@@ -27,9 +26,11 @@ public class ArrayDeque<T> implements Iterable<T> {
     private boolean isFull(){
         return size==items.length;
     }
+    @Override
     public boolean isEmpty(){
         return size==0;
     }
+    @Override
     public void addFirst(T item){
         if(isFull()){
             resize(items.length*2);
@@ -40,6 +41,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         items[first]=item;
         size++;
     }
+    @Override
     public void addLast(T item){
         if (isFull()) {
             resize(items.length*2);
@@ -50,6 +52,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         items[last]=item;
         size++;
     }
+    @Override
     public T removeFirst(){
         if(isEmpty()){
             return null;
@@ -64,6 +67,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         }
         return item;
     }
+    @Override
     public T removeLast(){
         if(isEmpty()){
             return null;
@@ -78,15 +82,18 @@ public class ArrayDeque<T> implements Iterable<T> {
         }
         return item;
     }
+    @Override
     public int size(){
         return size;
     }
+    @Override
     public T get(int index){
         if(index<0 || index>=size){
             return null;
         }
         return items[(index+first+items.length)%items.length];
     }
+    @Override
     public boolean equals(Object o){
         if(o==this)
             return true;
@@ -122,7 +129,15 @@ public class ArrayDeque<T> implements Iterable<T> {
             return item;
         }
     }
+    @Override
     public Iterator<T> iterator(){
         return new ArrayDequeIterator();
+    }
+    @Override
+    public void printDeque() {
+        for(int i=0;i<size;i++){
+            System.out.print(items[i].toString()+" ");
+        }
+        System.out.println();
     }
 }
