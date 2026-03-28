@@ -1,6 +1,9 @@
 package deque;
 
-public class LinkedListDeque<T> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedListDeque<T> implements Iterable<T>{
     private class Node{
         private T item;
         private Node next;
@@ -85,6 +88,8 @@ public class LinkedListDeque<T> {
         return temp;
     }
     public boolean equals(Object o){
+        if(o==this)
+            return true;
         if(o instanceof LinkedListDeque){
             LinkedListDeque<?> lld=(LinkedListDeque<?>)o;
             if(size==lld.size){
@@ -94,10 +99,35 @@ public class LinkedListDeque<T> {
                     if(curr1.item!=curr2.item){
                         return false;
                     }
+                    curr1=curr1.next;
+                    curr2=curr2.next;
                 }
                 return true;
             }
         }
         return false;
     }
+    private class LinkedListDequeIterator implements Iterator<T> {
+        private int position;
+        public LinkedListDequeIterator(){
+            position=0;
+        }
+        @Override
+        public boolean hasNext(){
+            return position<size;
+        }
+        @Override
+        public T next(){
+            if(!hasNext()){
+                throw new NoSuchElementException();
+            }
+            T temp=get(position);
+            position++;
+            return temp;
+        }
+    }
+    public Iterator<T> iterator(){
+        return new LinkedListDequeIterator();
+    }
+
 }

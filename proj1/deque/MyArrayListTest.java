@@ -145,5 +145,48 @@ public class MyArrayListTest {
 
 
     }
+    @Test
+    public void LinkedListDequeIteratorTest(){
+        LinkedListDeque<String> lld=new LinkedListDeque<>();
+        lld.addFirst("string1");
+        lld.addLast("string2");
+        lld.addLast("string3");
+        for(String s: lld){
+            System.out.println(s);
+        }
+
+    }
+    @Test
+    public void ArraydequeIteratorTest(){
+        ArrayDeque<String> lld=new ArrayDeque<>();
+        lld.addFirst("string1");
+        lld.addLast("string2");
+        lld.addLast("string3");
+        for(String s: lld){
+            System.out.println(s);
+        }
+
+    }
+    @Test
+    public void testEquals(){
+        ArrayDeque<String> lld1=new ArrayDeque<>();
+        lld1.addFirst("string1");
+        lld1.addLast("string2");
+        lld1.addLast("string3");
+        ArrayDeque<String> lld2=new ArrayDeque<>();
+        lld2.addFirst("string1");
+        lld2.addLast("string2");
+        lld2.addLast("string3");
+        assertEquals(lld1,lld2);
+        LinkedListDeque<String> lld3=new LinkedListDeque<>();
+        lld3.addFirst("string1");
+        lld3.addLast("string2");
+        lld3.addLast("string3");
+        LinkedListDeque<String> lld4=new LinkedListDeque<>();
+        lld4.addFirst("string1");
+        lld4.addLast("string2");
+        lld4.addLast("string3");
+        assertEquals(lld3,lld4);
+    }
 
 }
