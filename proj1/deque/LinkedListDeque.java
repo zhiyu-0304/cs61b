@@ -1,7 +1,5 @@
 package deque;
 
-import org.junit.Test;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -14,6 +12,13 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
             this.item=item;
             this.next=next;
             this.prev=prev;
+        }
+        public T nodeGetRecursive(int index){
+            if(index==0){
+                return item;
+            }
+            else
+                return next.nodeGetRecursive(index-1);
         }
     }
     private Node sentinel;
@@ -39,6 +44,13 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
         }
         return node.item;
     }
+    public T getRecursive(int index){
+        if(size==0||index>=size){
+            return null;
+        }
+        Node node=this.sentinel.next;
+        return node.nodeGetRecursive(index);
+    }
     //add an item to the first location in the list
     @Override
     public void addFirst(T item){
@@ -53,10 +65,6 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
         sentinel.prev=new Node(item,sentinel,prev);
         prev.next=sentinel.prev;
         size++;
-    }
-    @Override
-    public boolean isEmpty(){
-        return size==0;
     }
     @Override
     public int size() {

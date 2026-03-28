@@ -27,10 +27,6 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         return size==items.length;
     }
     @Override
-    public boolean isEmpty(){
-        return size==0;
-    }
-    @Override
     public void addFirst(T item){
         if(isFull()){
             resize(items.length*2);
