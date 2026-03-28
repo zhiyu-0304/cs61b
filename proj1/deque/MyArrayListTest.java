@@ -1,5 +1,6 @@
 package deque;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -188,5 +189,45 @@ public class MyArrayListTest {
         lld4.addLast("string3");
         assertEquals(lld3,lld4);
     }
+    @Test
+    public void randomizedTest(){
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        ArrayDeque<Integer> L1=new ArrayDeque<>();
 
+        int N = 50000;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 4);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast(randVal);
+                L1.addLast(randVal);
+            } else if (operationNumber == 1) {
+                // size
+                int size1 = L.size();
+                int size2 = L1.size();
+                assertEquals(size1, size2);
+            } else if (operationNumber == 2) {
+                if(L.size()<=0)
+                    continue;
+                assertEquals(L1.get(L1.size()-1),L.get(L.size()-1));
+            } else if (operationNumber == 3) {
+                if(L.size()<=0)
+                    continue;
+                int result1=L.removeLast();
+                int result2=L1.removeLast();
+                assertEquals(result1,result2);
+            }
+        }
+    }
+    @Test
+    public void testAD(){
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(1);
+        L.removeLast();
+        L.addLast(2);
+        L.addLast(3);
+        L.addLast(4);
+        L.removeFirst();
+    }
 }

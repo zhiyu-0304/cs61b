@@ -5,13 +5,13 @@ import java.util.NoSuchElementException;
 
 public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
     private T[] items;
-    private int first;
-    private int last;
+    private int nextFirst;
+    private int nextLast;
     private int size;
     public ArrayDeque() {
         items = (T[]) new Object[8];
-        first = 0;
-        last = 0;
+        nextFirst = 0;
+        nextLast = 1;
         size=0;
     }
     private void resize(int s){
@@ -19,8 +19,8 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         for(int i=0;i<size;i++){
             temp[i]=get(i);
         }
-        first=0;
-        last=size-1;
+        nextFirst=s-1;
+        nextLast=size;
         items=temp;
     }
     private boolean isFull(){
@@ -35,10 +35,8 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         if(isFull()){
             resize(items.length*2);
         }
-        if (size!=0){
-            first=(first-1+items.length)%items.length;
-        }
-        items[first]=item;
+        items[nextFirst]=item;
+        nextFirst=(nextFirst-1+items.length)%items.length;
         size++;
     }
     @Override
@@ -46,10 +44,8 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         if (isFull()) {
             resize(items.length*2);
         }
-        if(size!=0){
-            last=(last+1)%items.length;
-        }
-        items[last]=item;
+        items[nextLast]=item;
+        nextLast=(nextLast+1)%items.length;
         size++;
     }
     @Override
@@ -57,10 +53,10 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         if(isEmpty()){
             return null;
         }
+        int first=(nextFirst+1+items.length)%items.length;
         T item=items[first];
         items[first]=null;
-        first++;
-        first=(first+ items.length)%items.length;
+        nextFirst=first;
         size--;
         if(size>=4&&size*4<=items.length){
             resize(items.length/2);
@@ -72,10 +68,10 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         if(isEmpty()){
             return null;
         }
+        int last=(nextLast-1+items.length)%items.length;
         T item=items[last];
         items[last]=null;
-        last--;
-        last=(last+ items.length)%items.length;
+        nextLast=last;
         size--;
         if(size>=4&&size*4<=items.length){
             resize(items.length/2);
@@ -91,7 +87,7 @@ public class ArrayDeque<T> implements Iterable<T>,Deque<T> {
         if(index<0 || index>=size){
             return null;
         }
-        return items[(index+first+items.length)%items.length];
+        return items[(index+nextFirst+1+items.length)%items.length];
     }
     @Override
     public boolean equals(Object o){
