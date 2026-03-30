@@ -5,9 +5,11 @@ import deque.Deque;
 
 //Note: This file will not compile until you complete the Deque implementations
 public class GuitarString {
-    /** Constants. Do not change. In case you're curious, the keyword final
+    /**
+     * Constants. Do not change. In case you're curious, the keyword final
      * means the values cannot be changed at runtime. We'll discuss this and
-     * other topics in lecture on Friday. */
+     * other topics in lecture on Friday.
+     */
     private static final int SR = 44100;      // Sampling Rate
     private static final double DECAY = .996; // energy decay factor
 
@@ -16,9 +18,9 @@ public class GuitarString {
 
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
-        buffer=new LinkedListDeque<Double>();
-        int capacity=Math.round((float) (SR/frequency));
-        for(int i=0;i<capacity;i++){
+        buffer = new LinkedListDeque<Double>();
+        int capacity = Math.round((float) (SR / frequency));
+        for (int i = 0; i < capacity; i++) {
             buffer.addLast(0.0);
         }
     }
@@ -26,10 +28,10 @@ public class GuitarString {
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
-        int size=buffer.size();
-        for(int i=0;i<size;i++) {
+        int size = buffer.size();
+        for (int i = 0; i < size; i++) {
             buffer.removeFirst();
-            buffer.addLast(Math.random()-0.5);
+            buffer.addLast(Math.random() - 0.5);
         }
     }
 
@@ -37,8 +39,8 @@ public class GuitarString {
      * the Karplus-Strong algorithm.
      */
     public void tic() {
-        Double temp=buffer.removeFirst();
-        buffer.addLast((temp+buffer.get(0))*DECAY*0.5);
+        Double temp = buffer.removeFirst();
+        buffer.addLast((temp + buffer.get(0)) * DECAY * 0.5);
     }
 
     /* Return the double at the front of the buffer. */
