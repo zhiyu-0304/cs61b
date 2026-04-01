@@ -3,15 +3,14 @@
  */
 public class Collatz {
 
+    /** return the next number of n in a collatz sequence */
     public static int nextNumber(int n) {
-    if (n % 2 == 0) {
-        return n / 2;
-    } else {
-        return 3 * n + 1;
+        if(n%2==0){
+            return n/2;
+        }
+        return n*3+1;
     }
-}
 
->>>>>>> correct-version
     public static void main(String[] args) {
         int n = 5;
         System.out.print(n + " ");
