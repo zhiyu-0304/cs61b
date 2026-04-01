@@ -3,13 +3,10 @@
  */
 public class Collatz {
 
-    /** return the next number of n in a collatz sequence */
     public static int nextNumber(int n) {
-        if(n%2==0){
-            return n/2;
-        }
-        return n*3+1;
-    }
+    // 这是另一个版本：总是返回 1（明显错误）
+    return 1;
+}
 
     public static void main(String[] args) {
         int n = 5;
