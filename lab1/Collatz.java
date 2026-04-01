@@ -4,9 +4,14 @@
 public class Collatz {
 
     public static int nextNumber(int n) {
-    // 这是第三个版本：总是返回 n
-    return n;
+    if (n % 2 == 0) {
+        return n / 2;
+    } else {
+        return 3 * n + 1;
+    }
 }
+
+>>>>>>> correct-version
     public static void main(String[] args) {
         int n = 5;
         System.out.print(n + " ");
