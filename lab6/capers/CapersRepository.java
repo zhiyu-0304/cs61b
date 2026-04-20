@@ -34,10 +34,13 @@ public class CapersRepository {
      */
     public static void setupPersistence() throws IOException {
         // TODO
-        CAPERS_FOLDER.mkdir();
+        if (!CAPERS_FOLDER.exists())
+            CAPERS_FOLDER.mkdir();
         File STORY = join(".capers", "story");
-        STORY.createNewFile();
-        Dog.DOG_FOLDER.mkdir();
+        if(!STORY.exists())
+            STORY.createNewFile();
+        if(!Dog.DOG_FOLDER.exists())
+            Dog.DOG_FOLDER.mkdir();
 
     }
 
